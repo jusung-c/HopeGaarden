@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+java {
+    sourceCompatibility = '17'
+}
+
+ext {
+    projectGroup = project.findProperty("projectGroup")
+    buildVersion = project.findProperty("applicationVersion")
+}
+
+allprojects {
+    group = projectGroup
+    version = buildVersion
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: "java"
+    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
+
+    dependencies {
+        // lombok 설정
+        compileOnly("org.projectlombok:lombok")
+        annotationProcessor("org.projectlombok:lombok")
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
+}
+
+bootJar.enabled = false
+jar.enabled = false

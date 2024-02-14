@@ -1,0 +1,6 @@
+rootProject.name = 'hope-gaarden'
+
+include(
+        "application",
+        "domain"
+)
