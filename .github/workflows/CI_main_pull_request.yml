@@ -18,7 +18,7 @@ jobs:
           distribution: 'adopt'
 
       - run: touch ./application/src/main/resources/application-secret.yml
-      - run: echo "${{ secrets.PASSWORD }}" > ./src/main/resources/application-secret.yml
+      - run: echo "${{ secrets.PASSWORD }}" > ./application/src/main/resources/application-secret.yml
 
       - name: Gradle Caching
         uses: actions/cache@v3
