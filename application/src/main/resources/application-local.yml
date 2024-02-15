@@ -1,5 +1,17 @@
 spring.config.activate.on-profile: local
 
+jasypt:
+  encryptor:
+    bean: jasyptEncryptor
+
+application:
+  security:
+    jwt:
+      secret-key: ENC(PdTZWTGeNGFBEwt24hCiiU/Ra5DKJ+Jt2eyTiAOyf2yzD8BhxV3e0n3Rm7dbh/yTYgAzW/DM5xpc5O8LfxOtPzfHEThMXppwrPijFvpOnes=)
+      expiration: 86400000 # 1 day
+      refresh-token:
+        expiration: 604800000 # 7 days
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
