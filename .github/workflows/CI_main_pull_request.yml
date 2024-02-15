@@ -34,7 +34,6 @@ jobs:
 
       - name: Test with Gradle
         run: |
-          cd ./application
           ./gradlew clean build -x test
   test:
     runs-on: ubuntu-latest
