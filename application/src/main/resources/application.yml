@@ -10,6 +10,7 @@ spring:
     name: hope-gaarden
   profiles:
     active: local
+    include: secret
   config:
     import: database.yml
 
