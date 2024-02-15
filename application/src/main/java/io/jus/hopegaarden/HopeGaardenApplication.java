@@ -1,4 +1,4 @@
-package io.jus.hopegaarden.hopegaarden;
+package io.jus.hopegaarden;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
