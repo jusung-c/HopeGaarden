@@ -1,0 +1,3 @@
+
+# 로컬 모드 설정
+spring.config.activate.on-profile: local
