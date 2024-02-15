@@ -17,10 +17,13 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
+      - run: touch ./application/src/main/resources/application-secret.properties
+      - run: echo "${{ secrets.APPLICATION_SECRET }}" > ./application/src/main/resources/application-secret.properties
+
       # gradlew를 실행시키기 위해 권한 부여
       - name: Gradlew에게 실행권한 부여
         run: chmod +x ./gradlew
 
       - name: Test with Gradle
         run: |
-          ./gradlew clean build --exclude-task test
+          ./gradlew clean build
