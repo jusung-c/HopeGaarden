@@ -17,7 +17,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      - run: touch ./src/main/resources/application-secret.yml
+      - run: touch ./application/src/main/resources/application-secret.yml
       - run: echo "${{ secrets.PASSWORD }}" > ./src/main/resources/application-secret.yml
 
       - name: Gradle Caching
