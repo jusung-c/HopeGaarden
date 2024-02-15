@@ -5,10 +5,14 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: test-when-pull-request
     runs-on: ubuntu-latest
+    environment: test
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -16,9 +20,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-
-      - run: touch ./application/src/main/resources/application-secret.yml
-      - run: echo "${{ secrets.PASSWORD }}" > ./application/src/main/resources/application-secret.yml
 
       - name: Gradle Caching
         uses: actions/cache@v3
