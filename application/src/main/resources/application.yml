@@ -1,18 +1,15 @@
 server:
   port: 8080
 
-jasypt:
-  encryptor:
-    bean: jasyptEncryptor
-
 spring:
   application:
     name: hope-gaarden
   profiles:
     active: local
-    include: secret
-  config:
-    import: database.yml
+
+jasypt:
+  encryptor:
+    bean: jasyptEncryptor
 
 application:
   security:
