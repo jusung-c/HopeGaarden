@@ -34,10 +34,12 @@ jobs:
       - name: Test with Gradle
         run: |
           ./gradlew clean build -x test
+
   test:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - uses: actions/checkout@v3
       # gradlew를 실행시키기 위해 권한 부여
       - name: Gradlew에게 실행권한 부여
         run: chmod +x ./gradlew
@@ -51,7 +53,7 @@ jobs:
         run: |
           echo "${{ secrets.APPLICATION_DEFAULT }}" > ./application/src/main/resources/application.yml
           echo "${{ secrets.APPLICATION_TEST }}" > ./application/src/main/resources/application-test.yml
-      
+
       - name: Gradle 테스트
         run: |
           ./gradlew test
