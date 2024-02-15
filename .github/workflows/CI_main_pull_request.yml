@@ -51,7 +51,7 @@ jobs:
 
       - name: yml 파일 생성
         run: |
-          echo "${{ secrets.APPLICATION_DEFAULT }}" > ./application/src/main/resources/application.yml
+          echo "${{ secrets.APPLICATION_TEST_DEFAULT }}" > ./application/src/main/resources/application.yml
           echo "${{ secrets.APPLICATION_TEST }}" > ./application/src/main/resources/application-test.yml
 
       - name: Gradle 테스트
