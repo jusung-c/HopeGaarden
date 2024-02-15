@@ -1,0 +1,82 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: hope-gaarden
+  profiles:
+    active: local
+    include: secret
+
+---
+spring.config.activate.on-profile: local
+
+jasypt:
+  encryptor:
+    bean: jasyptEncryptor
+
+application:
+  security:
+    jwt:
+      secret-key: ENC(PdTZWTGeNGFBEwt24hCiiU/Ra5DKJ+Jt2eyTiAOyf2yzD8BhxV3e0n3Rm7dbh/yTYgAzW/DM5xpc5O8LfxOtPzfHEThMXppwrPijFvpOnes=)
+      expiration: 86400000 # 1 day
+      refresh-token:
+        expiration: 604800000 # 7 days
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(9IIY9LBPJFV6BOY5jfcX9aKek2jvdfA5lWctKqaFXf4GDSNZEPxcTpA07mmvrJAMDTII8VgX3JMeKquIQ4nnwHYaQk0bujSKWS+LKUH/Q9Q=)
+    username: ENC(rjJifLgylgc53Jk9f9mXDw==)
+    password: ENC(fOupeFdXa7BJmO7kQog0rw==)
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        highlight_sql: true
+        query:
+          in_clause_parameter_padding: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6380
+
+logging:
+  level:
+    org:
+      hibernate:
+        orm:
+          jdbc:
+            bind: trace
+
+---
+spring.config.activate.on-profile: test
+
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/hope
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  flyway:
+    enabled: false
+
+jasypt:
+  encryptor:
+    password: password
+
+jwt:
+  secret: fortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortest
+  expiration-period: 10000
