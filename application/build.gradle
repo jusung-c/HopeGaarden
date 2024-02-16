@@ -1,5 +1,4 @@
-bootJar.enabled = false
-jar.enabled = true
+
 
 dependencies {
     // 내부 모듈
@@ -23,3 +22,6 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+bootJar.enabled = true
+jar.enabled = false
