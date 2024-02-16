@@ -1,6 +1,13 @@
 bootJar.enabled = false
 jar.enabled = true
 
+// queryDSL 추가
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

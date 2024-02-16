@@ -42,4 +42,4 @@ out/
 .vscode/
 
 ### Q 클래스 ###
-/src/main/generated/
+**/src/main/generated/
