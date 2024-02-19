@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
     랜덤 포트를 사용해 내장 서버로 테스트 환경 실행
     - 여러 번 실행할 때 포트 충돌을 방지
  */
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class IntegrationHelper extends AbstractTestExecutionListener {
 
@@ -49,16 +51,9 @@ public class IntegrationHelper extends AbstractTestExecutionListener {
     }
 
     private void truncateAllTables(List<String> truncateAllTablesQuery) {
-        // truncate를 위해 외래키 제약 조건 잠시 비활성화
-        jdbcTemplate.execute("SET FOREIGN_KEY_CHECKS = 0");
-
         // truncate를 쿼리 실행
         for (String truncateQuery : truncateAllTablesQuery) {
             jdbcTemplate.execute(truncateQuery);
         }
-
-        // 다시 외래키 제약 조건 활성화
-        jdbcTemplate.execute("SET FOREIGN_KEY_CHECKS = 1");
-
     }
 }

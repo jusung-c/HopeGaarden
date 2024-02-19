@@ -4,24 +4,24 @@ import io.jus.hopegaarden.config.filter.CorsCustomFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebMvcConfig {
 
-    // CORS 필터를 등록
     @Bean
-    public FilterRegistrationBean corsFilter() {
-        FilterRegistrationBean<CorsCustomFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-        filterRegistrationBean.setFilter(new CorsCustomFilter());
+    public CorsFilter corsFilter() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin("*"); // 모든 도메인에서 접근 허용
+        corsConfiguration.addAllowedMethod("*"); // 모든 HTTP 메소드 허용
+        corsConfiguration.addAllowedHeader("*"); // 모든 헤더 허용
 
-        // 필터의 순서 설정 -> 1로 설정해 가장 먼저 실행되도록
-        filterRegistrationBean.setOrder(1);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration); // 모든 URL에 대해 CORS 설정 적용
 
-        // 모든 URL에 대해 필터 적용
-        filterRegistrationBean.addUrlPatterns("/*");
-
-        return filterRegistrationBean;
+        return new CorsFilter(source);
     }
-
 }
