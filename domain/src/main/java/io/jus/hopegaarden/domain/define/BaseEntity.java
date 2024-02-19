@@ -1,4 +1,4 @@
-package io.jus.hopegaarden.define;
+package io.jus.hopegaarden.domain.define;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

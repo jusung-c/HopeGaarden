@@ -1,4 +1,4 @@
-package io.jus.hopegaarden.config;
+package io.jus.hopegaarden.domain.config;
 
 import com.querydsl.jpa.JPQLTemplates;
 import com.querydsl.jpa.impl.JPAQueryFactory;
