@@ -2,5 +2,6 @@ rootProject.name = 'hope-gaarden'
 
 include(
         "application",
-        "domain"
+        "domain",
+        "common:exception"
 )
