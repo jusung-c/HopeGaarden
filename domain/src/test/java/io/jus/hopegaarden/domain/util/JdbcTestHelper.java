@@ -1,6 +1,8 @@
 package io.jus.hopegaarden.domain.util;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -9,9 +11,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @ActiveProfiles("test")
 @SpringBootTest
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 public class JdbcTestHelper {
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -37,3 +40,4 @@ public class JdbcTestHelper {
         }
     }
 }
+
