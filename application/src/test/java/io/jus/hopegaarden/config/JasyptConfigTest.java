@@ -1,13 +1,12 @@
 package io.jus.hopegaarden.config;
 
-import io.jus.hopegaarden.TestConfig;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 
 @SuppressWarnings("NonAsciiCharacters")
-class JasyptConfigTest extends TestConfig {
+class JasyptConfigTest {
     @Value("${jasypt.encryptor.password}")
     private String key;
 

@@ -3,7 +3,8 @@ package io.jus.hopegaarden;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-class HopeGaardenApplicationTests extends TestConfig {
+@SpringBootTest
+class HopeGaardenApplicationTests {
 
     @Test
     void contextLoads() {
