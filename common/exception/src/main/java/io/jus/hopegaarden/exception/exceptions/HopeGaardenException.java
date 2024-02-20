@@ -1,5 +1,9 @@
-package io.jus.hopegaarden.exception;
+package io.jus.hopegaarden.exception.exceptions;
 
+import io.jus.hopegaarden.exception.ErrorCode;
+import lombok.Getter;
+
+@Getter
 public class HopeGaardenException extends RuntimeException {
     private ErrorCode errorCode;
 

@@ -1,6 +1,7 @@
 package io.jus.hopegaarden.domain.define.member.constant;
 
-import io.jus.hopegaarden.exception.member.RoleNotFoundException;
+import io.jus.hopegaarden.exception.ErrorCode;
+import io.jus.hopegaarden.exception.exceptions.member.RoleNotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +20,6 @@ public enum MemberRole {
         return Arrays.stream(values())
                 .filter(value -> value.role.equalsIgnoreCase(role))
                 .findFirst()
-                .orElseThrow(RoleNotFoundException::new);
+                .orElseThrow(() -> new RoleNotFoundException(ErrorCode.MEMBER_ROLE_NOT_FOUND));
     }
 }
