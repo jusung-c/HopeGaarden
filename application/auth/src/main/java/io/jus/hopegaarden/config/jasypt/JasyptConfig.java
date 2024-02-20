@@ -1,4 +1,4 @@
-package io.jus.hopegaarden.config;
+package io.jus.hopegaarden.config.jasypt;
 
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;

@@ -1,24 +1,37 @@
 package io.jus.hopegaarden.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebMvcConfig {
+public class WebMvcConfig implements WebMvcConfigurer {
+    @Value("${spring.profiles.active}")
+    private String activeProfile;
 
-    @Bean
-    public CorsFilter corsFilter() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("*"); // 모든 도메인에서 접근 허용
-        corsConfiguration.addAllowedMethod("*"); // 모든 HTTP 메소드 허용
-        corsConfiguration.addAllowedHeader("*"); // 모든 헤더 허용
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        if (activeProfile.equals("prod")) {
+            prodProfileCorsMapping(registry);
+        } else {
+            devProfileCorsMapping(registry);
+        }
+    }
+    // Cors 모두 오픈 (개발환경)
+    public void devProfileCorsMapping(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOriginPatterns("*")
+                .allowedMethods("GET", "POST")
+                .allowedHeaders("*")
+                .allowCredentials(true);
+    }
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfiguration); // 모든 URL에 대해 CORS 설정 적용
+    private void prodProfileCorsMapping(CorsRegistry registry) {
 
-        return new CorsFilter(source);
     }
 }
