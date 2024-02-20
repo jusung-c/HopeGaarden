@@ -1,4 +1,4 @@
-package io.jus.hopegaarden.util;
+package io.jus.hopegaarden.utils;
 
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;

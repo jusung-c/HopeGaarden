@@ -1,6 +1,6 @@
 package io.jus.hopegaarden.config;
 
-import io.jus.hopegaarden.util.IntegrationHelper;
+import io.jus.hopegaarden.utils.IntegrationHelper;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.junit.jupiter.api.Test;

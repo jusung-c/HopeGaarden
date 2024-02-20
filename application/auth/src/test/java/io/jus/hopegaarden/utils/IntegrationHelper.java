@@ -1,4 +1,4 @@
-package io.jus.hopegaarden.util;
+package io.jus.hopegaarden.utils;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
