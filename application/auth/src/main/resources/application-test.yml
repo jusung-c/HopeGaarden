@@ -19,5 +19,5 @@ jasypt:
     password: password
 
 jwt:
-  secret: fortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortest
-  expiration-period: 10000
+  secret-key: fortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortest
+  expiration: 10000

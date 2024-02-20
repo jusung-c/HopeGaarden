@@ -1,6 +1,6 @@
 package io.jus.hopegaarden.domain.define.member.constant;
 
-import io.jus.hopegaarden.exception.exceptions.RoleNotFoundException;
+import io.jus.hopegaarden.exception.member.RoleNotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
