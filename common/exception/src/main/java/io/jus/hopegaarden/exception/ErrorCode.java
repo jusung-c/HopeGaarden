@@ -21,9 +21,11 @@ public enum ErrorCode {
     JWT_MALFORMED(401, HttpStatus.UNAUTHORIZED, "올바른 JWT 토큰의 형태가 아닙니다."),
     JWT_SIGNATURE(401, HttpStatus.UNAUTHORIZED, "올바른 SIGNATURE가 아닙니다."),
     JWT_ILLEGAL_ARGUMENT(400, HttpStatus.BAD_REQUEST, "JWT 토큰의 구성 요소가 올바르지 않습니다."),
+    JWT_INVALID_HEADER(400, HttpStatus.BAD_REQUEST, "Header의 형식이 올바르지 않습니다."),
 
     // Member
-    MEMBER_ROLE_NOT_FOUND(404, HttpStatus.NOT_FOUND, "멤버의 권한을 찾을 수 없습니다."),
+    MEMBER_NOT_FOUND(404, HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다."),
+    MEMBER_ROLE_NOT_FOUND(404, HttpStatus.NOT_FOUND, "사용자의 권한을 찾을 수 없습니다."),
 
     ;
 

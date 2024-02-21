@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static io.jus.hopegaarden.domain.define.token.QJwtToken.jwtToken;
+import static io.jus.hopegaarden.domain.define.token.jwt.QJwtToken.jwtToken;
 
 @Component
 @RequiredArgsConstructor
