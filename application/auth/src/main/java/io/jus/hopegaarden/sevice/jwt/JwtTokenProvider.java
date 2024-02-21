@@ -81,14 +81,15 @@ public class JwtTokenProvider {
     /*
         JWT 토큰 검증
     */
-    public boolean isTokenValid(String token, String username) {
-        Claims claims = extractAllClaims(token);
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        final Claims claims = extractAllClaims(token);
 
         if (!claims.containsKey("role")) return false;
         if (!claims.containsKey("nickname")) return false;
 
-        String subject = claims.getSubject();
-        return (subject.equals(username)) && !isTokenExpired(token);
+        final String username = extractSubject(token);
+
+        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
     // JWT 토큰이 만료되었는지 확인
