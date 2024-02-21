@@ -2,11 +2,14 @@ package io.jus.hopegaarden.utils;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestConstructor;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
 import java.util.List;
@@ -15,6 +18,8 @@ import java.util.List;
     랜덤 포트를 사용해 내장 서버로 테스트 환경 실행
     - 여러 번 실행할 때 포트 충돌을 방지
  */
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class IntegrationHelper extends AbstractTestExecutionListener {
