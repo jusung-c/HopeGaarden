@@ -34,8 +34,9 @@ public class Member extends BaseEntity implements UserDetails {
     private MemberRole role;
 
     @Builder
-    public Member(String nickname, String email, MemberRole role) {
+    public Member(String nickname, String password, String email, MemberRole role) {
         this.nickname = nickname;
+        this.password = password;
         this.email = email;
         this.role = role;
     }

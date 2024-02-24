@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
-import static io.jus.hopegaarden.domain.define.member.fixture.MemberFixture.일반_유저_생성;
+import static io.jus.hopegaarden.domain.fixture.MemberFixture.일반_유저_생성;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 @SuppressWarnings("NonAsciiCharacters")

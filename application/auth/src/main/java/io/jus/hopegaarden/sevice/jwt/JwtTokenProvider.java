@@ -31,14 +31,14 @@ public class JwtTokenProvider {
     /*
         Token 생성
     */
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    public String generateToken(Map<String, String> extraClaims, UserDetails userDetails) {
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
     public String generateRefreshToken(UserDetails userDetails) {
         return buildToken(new HashMap<>(), userDetails, refreshExpiration);
     }
-    private String buildToken(Map<String, Object> extraClaims, UserDetails userDetails, long expiration) {
+    private String buildToken(Map<String, String> extraClaims, UserDetails userDetails, long expiration) {
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
@@ -86,6 +86,7 @@ public class JwtTokenProvider {
 
         if (!claims.containsKey("role")) return false;
         if (!claims.containsKey("nickname")) return false;
+        if (!claims.containsKey("password")) return false;
 
         final String username = extractSubject(token);
 
