@@ -25,7 +25,7 @@ class AuthenticationExtractorTest {
     @Test
     void 토큰이_정상적으로_조회된다() {
         // given
-        String expectedResponseToken = "Bearer jwtToken refreshToken";
+        String expectedResponseToken = "Bearer jwtToken";
         when(request.getHeader(AUTHORIZATION_HEADER)).thenReturn(expectedResponseToken);
 
         // when

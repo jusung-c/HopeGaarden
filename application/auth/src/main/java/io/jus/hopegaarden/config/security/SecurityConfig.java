@@ -30,7 +30,6 @@ public class SecurityConfig {
                         authorizeHttpRequest
                                 // UnAuth Area
                                 .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/test").hasAnyAuthority("MEMBER")
                                 // Others
                                 .anyRequest().authenticated()
                 )

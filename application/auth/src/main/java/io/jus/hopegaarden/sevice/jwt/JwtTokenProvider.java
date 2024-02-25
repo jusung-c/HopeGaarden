@@ -23,10 +23,10 @@ public class JwtTokenProvider {
     private String secret;
 
     @Value("${jwt.expiration}")
-    private int jwtExpiration;
+    private long jwtExpiration;
 
     @Value("${jwt.refresh-token.expiration}")
-    private int refreshExpiration;
+    private long refreshExpiration;
 
     /*
         Token 생성

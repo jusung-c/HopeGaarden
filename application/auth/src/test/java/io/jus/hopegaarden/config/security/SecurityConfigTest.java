@@ -91,7 +91,7 @@ class SecurityConfigTest extends IntegrationHelper {
         // when
         mockMvc.perform(
                 get(uri)
-                        .header("Authorization", "Bearer " + jwtToken + " " + refreshToken)
+                        .header("Authorization", "Bearer " + jwtToken)
         )
                 .andExpect(status().isOk())
                 .andExpect(content().string(expectBody))
@@ -121,7 +121,7 @@ class SecurityConfigTest extends IntegrationHelper {
         // when
         mockMvc.perform(
                         get(uri)
-                                .header("Authorization", "Bearer " + jwtToken + " " + refreshToken)
+                                .header("Authorization", "Bearer " + jwtToken)
                 )
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.body.value").value(401))
