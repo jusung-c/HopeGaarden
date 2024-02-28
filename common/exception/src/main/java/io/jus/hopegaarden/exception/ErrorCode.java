@@ -24,7 +24,7 @@ public enum ErrorCode {
     JWT_ILLEGAL_ARGUMENT(400, HttpStatus.BAD_REQUEST, "JWT 토큰의 구성 요소가 올바르지 않습니다."),
     JWT_INVALID_HEADER(400, HttpStatus.BAD_REQUEST, "Header의 형식이 올바르지 않습니다."),
     JWT_SUBJECT_IS_NULL(400, HttpStatus.BAD_REQUEST, "해당 JWT 토큰의 식별자가 null입니다."),
-
+    JWT_NOT_FOUND(400, HttpStatus.BAD_REQUEST, "요청의 헤더에서 JWT 토큰을 읽어올 수 없습니다."),
 
     // Member
     MEMBER_NOT_FOUND(404, HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다."),

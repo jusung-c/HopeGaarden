@@ -14,6 +14,7 @@ public class JwtToken extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 500)
     private String token;
 
     @Enumerated(EnumType.STRING)
@@ -32,5 +33,10 @@ public class JwtToken extends BaseEntity {
         this.expired = expired;
         this.revoked = revoked;
         this.email = email;
+    }
+
+    public void setTokenInvalid() {
+        this.expired = true;
+        this.revoked = true;
     }
 }

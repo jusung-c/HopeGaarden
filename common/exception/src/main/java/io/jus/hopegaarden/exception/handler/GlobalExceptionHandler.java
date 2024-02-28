@@ -49,6 +49,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> exception(Exception e) {
         log.error("[HG ERROR]: {}", e.getMessage());
+
         return ResponseEntity
                 .status(INTERNAL_SERVER_ERROR)
                 .body(ErrorResponse.of(500, INTERNAL_SERVER_ERROR, e.getMessage()));

@@ -1,4 +1,4 @@
-package io.jus.hopegaarden.controller.auth.response;
+package io.jus.hopegaarden.sevice.auth.response;
 
 public record AuthResponse(
         String accessToken,
