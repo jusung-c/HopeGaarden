@@ -93,6 +93,11 @@ public class JwtTokenProvider {
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
+    public boolean isRefreshTokenValid(String token, UserDetails userDetails) {
+
+        return (extractSubject(token).equals(userDetails.getUsername())) && !isTokenExpired(token);
+    }
+
     // JWT 토큰이 만료되었는지 확인
     public boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());

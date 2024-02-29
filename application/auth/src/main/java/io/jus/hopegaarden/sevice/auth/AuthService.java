@@ -1,8 +1,6 @@
 package io.jus.hopegaarden.sevice.auth;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jus.hopegaarden.controller.auth.request.AuthRequest;
-import io.jus.hopegaarden.controller.auth.response.LoginResponse;
 import io.jus.hopegaarden.domain.define.member.Member;
 import io.jus.hopegaarden.domain.define.member.repository.MemberRepository;
 import io.jus.hopegaarden.domain.define.token.jwt.JwtToken;
@@ -13,14 +11,10 @@ import io.jus.hopegaarden.exception.exceptions.auth.TokenInvalidException;
 import io.jus.hopegaarden.exception.exceptions.member.MemberNotFoundException;
 import io.jus.hopegaarden.sevice.auth.response.AuthResponse;
 import io.jus.hopegaarden.sevice.jwt.JwtTokenProvider;
-import io.jus.hopegaarden.utils.AuthenticationExtractor;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,10 +35,9 @@ public class AuthService {
     private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final TokenRepository tokenRepository;
-    private final ObjectMapper objectMapper;
 
     @Transactional
-    public LoginResponse authenticate(AuthRequest login) {
+    public AuthResponse authenticate(AuthRequest login) {
         Member member = memberRepository.findByEmail(login.email()).orElseThrow(() -> {
             log.error("[HG ERROR]: {}", ErrorCode.MEMBER_NOT_FOUND.getMessage());
             throw new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND);
@@ -64,7 +57,44 @@ public class AuthService {
         String jwtToken = jwtTokenProvider.generateToken(setClaims(member), member);
         saveJwtToken(member, jwtToken);
 
-        return new LoginResponse(jwtToken);
+        // refresh token 생성
+        String refreshToken = jwtTokenProvider.generateRefreshToken(member);
+        saveJwtToken(member, refreshToken);
+
+        return new AuthResponse(jwtToken, refreshToken);
+    }
+
+    @Transactional
+    public String refreshToken(String refreshToken) throws IOException {
+        if (refreshToken == null) {
+            log.error("[HG ERROR]: {}", ErrorCode.JWT_REFRESH_TOKEN_IS_NULL.getMessage());
+            throw new TokenInvalidException(ErrorCode.JWT_REFRESH_TOKEN_IS_NULL);
+        }
+
+        final String userEmail = jwtTokenProvider.extractSubject(refreshToken);
+
+        if (userEmail == null) {
+            log.error("[HG ERROR]: {}", ErrorCode.JWT_SUBJECT_IS_NULL.getMessage());
+            throw new TokenInvalidException(ErrorCode.JWT_SUBJECT_IS_NULL);
+        }
+
+        Member member = memberRepository.findByEmail(userEmail).orElseThrow(() -> {
+            log.error("[HG ERROR]: {}", ErrorCode.MEMBER_NOT_FOUND.getMessage());
+            throw new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND);
+        });
+
+        // 활성화된 refreshToken인지 확인
+        if (jwtTokenProvider.isRefreshTokenValid(refreshToken, member) && isTokenValid(refreshToken)) {
+            // Jwt 재발급
+            String newJwtToken = jwtTokenProvider.generateToken(setClaims(member), member);
+            saveJwtToken(member, newJwtToken);
+
+            return newJwtToken;
+        } else {
+            log.error("[HG ERROR]: {}", ErrorCode.JWT_REFRESH_TOKEN_INVALID.getMessage());
+            throw new TokenInvalidException(ErrorCode.JWT_REFRESH_TOKEN_INVALID);
+        }
+
     }
 
     private void revokeAllUserTokens(Member member) {
@@ -72,38 +102,6 @@ public class AuthService {
         if (!validTokens.isEmpty()) {
             validTokens.forEach(JwtToken::setTokenInvalid);
             tokenRepository.saveAll(validTokens);
-        }
-    }
-
-    @Transactional
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        final String refreshToken = AuthenticationExtractor.extractToken(request)
-                .orElseThrow(() -> {
-                    log.error("[HG ERROR]: {}", ErrorCode.JWT_NOT_FOUND.getMessage());
-                    return new TokenInvalidException(ErrorCode.JWT_NOT_FOUND);
-                });
-
-
-        final String userEmail = jwtTokenProvider.extractSubject(refreshToken);
-
-        if (userEmail != null) {
-            Member member = memberRepository.findByEmail(userEmail).orElseThrow(() -> {
-                log.error("[HG ERROR]: {}", ErrorCode.MEMBER_NOT_FOUND.getMessage());
-                throw new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND);
-            });
-
-            if (jwtTokenProvider.isTokenValid(refreshToken, member)) {
-                HashMap<String, String> claims = setClaims(member);
-
-                // Jwt 재발급
-                String newJwtToken = jwtTokenProvider.generateToken(claims, member);
-                saveJwtToken(member, newJwtToken);
-
-                AuthResponse authResponse = new AuthResponse(newJwtToken, refreshToken);
-
-                objectMapper.writeValue(response.getOutputStream(), authResponse);
-
-            }
         }
     }
 
@@ -127,5 +125,10 @@ public class AuthService {
         tokenRepository.save(token);
     }
 
+    private boolean isTokenValid(String refreshToken) {
+        return tokenRepository.findByToken(refreshToken)
+                .map(token -> !token.isExpired() && !token.isRevoked())
+                .orElse(false);
+    }
 
 }
