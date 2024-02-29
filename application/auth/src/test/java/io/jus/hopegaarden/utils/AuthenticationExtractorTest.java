@@ -8,13 +8,14 @@ import org.mockito.Mockito;
 
 import java.util.Optional;
 
+import static io.jus.hopegaarden.utils.IntegrationHelper.NON_ASCII;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings(NON_ASCII)
 class AuthenticationExtractorTest {
 
     private static final String AUTHORIZATION_HEADER = "Authorization";
