@@ -1,0 +1,26 @@
+
+
+dependencies {
+    // 내부 모듈
+    implementation project(':domain')
+    implementation project(':common:exception')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // util
+    implementation 'com.google.guava:guava:33.0.0-jre'
+
+    // security
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+bootJar.enabled = true
+jar.enabled = false

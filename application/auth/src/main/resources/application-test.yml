@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/hope
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  flyway:
+    enabled: false
+
+jasypt:
+  encryptor:
+    password: password
+
+jwt:
+  secret-key: a0ef79582d3f015f6142137bba2292bc26335bbd9d815cf860ed4efe5c49307c44c090e5cf127de5af50191a6d1b17e8a01afdcf4f2459fc88859be8ec83d105
+  expiration: 10000
