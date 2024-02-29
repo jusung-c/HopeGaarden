@@ -41,6 +41,23 @@ public class Member extends BaseEntity implements UserDetails {
         this.role = role;
     }
 
+    // 사용자가 ADMIN인지 체크
+    public boolean isAdmin() {
+        return this.role.isAdministrator();
+    }
+
+    // 기본 사용자 생성
+    public static Member createDefaultRole(final String email,
+                                           final String password,
+                                           final String nickname) {
+        return Member.builder()
+                .email(email)
+                .password(password)
+                .nickname(nickname)
+                .role(MemberRole.MEMBER)
+                .build();
+    }
+
     // Spring Security UserDetails Area
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

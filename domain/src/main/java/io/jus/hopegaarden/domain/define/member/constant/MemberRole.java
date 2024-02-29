@@ -22,4 +22,9 @@ public enum MemberRole {
                 .findFirst()
                 .orElseThrow(() -> new RoleNotFoundException(ErrorCode.MEMBER_ROLE_NOT_FOUND));
     }
+
+    // ADMIN 체크
+    public boolean isAdministrator() {
+        return this.equals(ADMIN);
+    }
 }
