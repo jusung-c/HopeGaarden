@@ -23,6 +23,9 @@ import java.util.List;
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class IntegrationHelper extends AbstractTestExecutionListener {
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String BEARER = "Bearer ";
+    public static final String NON_ASCII = "NonAsciiCharacters";
 
     // 무작위로 선택한 포트를 주입
     @LocalServerPort
