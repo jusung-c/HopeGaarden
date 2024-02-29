@@ -19,11 +19,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Map;
 
+import static io.jus.hopegaarden.utils.IntegrationHelper.NON_ASCII;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings(NON_ASCII)
 @AutoConfigureMockMvc
 class SecurityConfigTest extends IntegrationHelper {
     @Autowired

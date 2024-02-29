@@ -15,10 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.jus.hopegaarden.domain.fixture.MemberFixture.일반_유저_생성;
+import static io.jus.hopegaarden.utils.IntegrationHelper.NON_ASCII;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
-@SuppressWarnings("NonAsciiCharacters")
+@SuppressWarnings(NON_ASCII)
 class JwtTokenProviderTest extends IntegrationHelper {
 
     @Autowired

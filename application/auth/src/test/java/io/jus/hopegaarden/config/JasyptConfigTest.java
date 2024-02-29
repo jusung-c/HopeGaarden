@@ -6,7 +6,9 @@ import org.jasypt.util.text.BasicTextEncryptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 
-@SuppressWarnings("NonAsciiCharacters")
+import static io.jus.hopegaarden.utils.IntegrationHelper.NON_ASCII;
+
+@SuppressWarnings(NON_ASCII)
 class JasyptConfigTest extends IntegrationHelper {
     @Value("${jasypt.encryptor.password}")
     private String key;
