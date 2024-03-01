@@ -3,7 +3,7 @@ package io.jus.hopegaarden.controller.auth.request;
 import jakarta.validation.constraints.NotBlank;
 import validation.IsEmail;
 
-public record SignupRequest(
+public record SignUpRequest(
         @NotBlank(message = "닉네임을 입력해주세요.")
         String nickname,
 
@@ -12,6 +12,9 @@ public record SignupRequest(
         String email,
 
         @NotBlank(message = "패스워드를 입력해주세요.")
-        String password
+        String password,
+
+        @NotBlank(message = "패스워드를 확인해주세요.")
+        String passwordVerify
 ) {
 }
