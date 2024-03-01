@@ -9,7 +9,7 @@ public class MemberFixture {
         return Member.builder()
                 .nickname("nickname")
                 .password("password")
-                .email("email")
+                .email("email@naver.com")
                 .role(MemberRole.MEMBER)
                 .build();
     }

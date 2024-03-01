@@ -1,4 +1,4 @@
-package io.jus.hopegaarden.utils;
+package auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.util.StringUtils;

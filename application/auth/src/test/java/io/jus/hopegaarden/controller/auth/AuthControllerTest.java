@@ -67,13 +67,42 @@ class AuthControllerTest extends IntegrationHelper {
         mockMvc.perform(post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(AuthRequest.builder()
-                                .email("email")
+                                .email("email@naver.com")
                                 .password("password")
                                 .build())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.access_token").exists())
                 .andExpect(header().exists(HttpHeaders.SET_COOKIE))
                 .andExpect(header().string(HttpHeaders.SET_COOKIE, containsString("refreshToken")))
+                .andDo(print());
+
+    }
+
+    @Test
+    void 로그인_요청_실패_테스트() throws Exception {
+        // given
+        Member member = memberRepository.save(일반_유저_생성());
+
+        Map<String, String> map = TokenUtil.createTokenMap(member);
+        String token = jwtTokenProvider.generateToken(map, member);
+        String refresh = jwtTokenProvider.generateRefreshToken(member);
+
+        // when
+        when(authService.authenticate(any(AuthRequest.class)))
+                .thenReturn(AuthResponse.builder()
+                        .accessToken(token)
+                        .refreshToken(refresh)
+                        .build());
+
+        // then
+        mockMvc.perform(post("/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(AuthRequest.builder()
+                                .email("email")
+                                .password("password")
+                                .build())))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("email: 잘못된 형식의 이메일입니다."))
                 .andDo(print());
 
     }

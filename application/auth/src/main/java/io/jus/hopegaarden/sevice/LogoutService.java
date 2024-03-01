@@ -1,12 +1,11 @@
 package io.jus.hopegaarden.sevice;
 
-import io.jus.hopegaarden.domain.define.member.Member;
 import io.jus.hopegaarden.domain.define.token.jwt.JwtToken;
 import io.jus.hopegaarden.domain.define.token.jwt.repository.TokenRepository;
 import io.jus.hopegaarden.exception.ErrorCode;
 import io.jus.hopegaarden.exception.exceptions.auth.TokenInvalidException;
 import io.jus.hopegaarden.sevice.jwt.JwtTokenProvider;
-import io.jus.hopegaarden.utils.AuthenticationExtractor;
+import auth.AuthenticationExtractor;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

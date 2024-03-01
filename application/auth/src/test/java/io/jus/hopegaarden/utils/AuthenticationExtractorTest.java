@@ -1,5 +1,6 @@
 package io.jus.hopegaarden.utils;
 
+import auth.AuthenticationExtractor;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -11,7 +12,6 @@ import java.util.Optional;
 import static io.jus.hopegaarden.utils.IntegrationHelper.NON_ASCII;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
