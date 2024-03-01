@@ -4,6 +4,8 @@ import io.jus.hopegaarden.controller.auth.signup.request.SignUpRequest;
 import io.jus.hopegaarden.domain.define.member.Member;
 import io.jus.hopegaarden.domain.define.member.repository.MemberRepository;
 import io.jus.hopegaarden.domain.fixture.MemberFixture;
+import io.jus.hopegaarden.exception.ErrorCode;
+import io.jus.hopegaarden.exception.exceptions.auth.SignUpException;
 import io.jus.hopegaarden.utils.IntegrationHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,26 @@ class SignUpServiceTest extends IntegrationHelper {
             softly.assertThat(findMember.getEmail()).isEqualTo(request.email());
             softly.assertThat(findMember.getPassword()).isEqualTo(request.password());
         });
+    }
+
+    @Test
+    void 회원가입_비밀번호_불일치_테스트() {
+        // given
+        Member member = MemberFixture.일반_유저_생성();
+
+        var request = SignUpRequest.builder()
+                .email(member.getEmail())
+                .nickname(member.getNickname())
+                .password(member.getPassword())
+                .passwordVerify("invalid value")
+                .build();
+
+        // then
+        var e = assertThrows(SignUpException.class, () -> {
+            signUpService.requestSignup(request);
+        });
+
+        assertEquals(e.getMessage(), ErrorCode.PASSWORD_DO_NOT_MATCH.getMessage());
     }
 
 }
