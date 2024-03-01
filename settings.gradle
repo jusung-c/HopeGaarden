@@ -4,5 +4,6 @@ include(
         "application:auth",
         "application:api",
         "domain",
-        "common:exception"
+        "common:exception",
+        "common:utils",
 )
