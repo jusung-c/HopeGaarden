@@ -5,6 +5,7 @@ import io.jus.hopegaarden.controller.auth.response.LoginResponse;
 import io.jus.hopegaarden.sevice.auth.AuthService;
 import io.jus.hopegaarden.sevice.auth.response.AuthResponse;
 import io.jus.hopegaarden.sevice.jwt.JwtTokenProvider;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -21,7 +22,7 @@ public class AuthController {
     private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> authenticate(@RequestBody AuthRequest login) {
+    public ResponseEntity<LoginResponse> authenticate(@RequestBody @Valid AuthRequest login) {
 
         AuthResponse authResponse = authService.authenticate(login);
 

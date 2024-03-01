@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = EmailValidator.class)
 public @interface IsEmail {
-    String message() default "Invalid email format";
+    String message() default "잘못된 형식의 이메일입니다.";
 
     Class<?>[] groups() default {};
 

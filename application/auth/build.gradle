@@ -9,6 +9,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
+    // validation
+    api 'org.springframework.boot:spring-boot-starter-validation'
+
     // util
     implementation 'com.google.guava:guava:33.0.0-jre'
 
