@@ -1,6 +1,6 @@
-package io.jus.hopegaarden.controller.auth;
+package io.jus.hopegaarden.controller.auth.signup;
 
-import io.jus.hopegaarden.controller.auth.request.SignUpRequest;
+import io.jus.hopegaarden.controller.auth.signup.request.SignUpRequest;
 
 public interface SignUpUsecase {
 

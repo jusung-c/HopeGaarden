@@ -1,11 +1,11 @@
 package io.jus.hopegaarden.controller.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jus.hopegaarden.controller.auth.request.AuthRequest;
+import io.jus.hopegaarden.controller.auth.login.request.AuthRequest;
 import io.jus.hopegaarden.domain.define.member.Member;
 import io.jus.hopegaarden.domain.define.member.repository.MemberRepository;
-import io.jus.hopegaarden.sevice.auth.AuthService;
-import io.jus.hopegaarden.sevice.auth.response.AuthResponse;
+import io.jus.hopegaarden.sevice.auth.login.AuthService;
+import io.jus.hopegaarden.sevice.auth.login.response.AuthResponse;
 import io.jus.hopegaarden.sevice.jwt.JwtTokenProvider;
 import io.jus.hopegaarden.utils.IntegrationHelper;
 import io.jus.hopegaarden.utils.TokenUtil;

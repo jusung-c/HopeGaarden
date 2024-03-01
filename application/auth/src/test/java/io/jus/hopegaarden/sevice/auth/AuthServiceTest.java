@@ -1,6 +1,6 @@
 package io.jus.hopegaarden.sevice.auth;
 
-import io.jus.hopegaarden.controller.auth.request.AuthRequest;
+import io.jus.hopegaarden.controller.auth.login.request.AuthRequest;
 import io.jus.hopegaarden.domain.define.member.Member;
 import io.jus.hopegaarden.domain.define.member.repository.MemberRepository;
 import io.jus.hopegaarden.domain.define.token.jwt.JwtToken;
@@ -8,7 +8,8 @@ import io.jus.hopegaarden.domain.define.token.jwt.constant.TokenType;
 import io.jus.hopegaarden.domain.define.token.jwt.repository.TokenRepository;
 import io.jus.hopegaarden.exception.ErrorCode;
 import io.jus.hopegaarden.exception.exceptions.auth.TokenInvalidException;
-import io.jus.hopegaarden.sevice.auth.response.AuthResponse;
+import io.jus.hopegaarden.sevice.auth.login.AuthService;
+import io.jus.hopegaarden.sevice.auth.login.response.AuthResponse;
 import io.jus.hopegaarden.sevice.jwt.JwtTokenProvider;
 import io.jus.hopegaarden.utils.IntegrationHelper;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,9 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
 

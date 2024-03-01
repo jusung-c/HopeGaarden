@@ -1,4 +1,4 @@
-package io.jus.hopegaarden.sevice.auth.response;
+package io.jus.hopegaarden.sevice.auth.login.response;
 
 import lombok.Builder;
 

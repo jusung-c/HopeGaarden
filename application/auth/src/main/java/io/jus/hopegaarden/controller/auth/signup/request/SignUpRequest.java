@@ -1,4 +1,4 @@
-package io.jus.hopegaarden.controller.auth.request;
+package io.jus.hopegaarden.controller.auth.signup.request;
 
 import jakarta.validation.constraints.NotBlank;
 import validation.IsEmail;

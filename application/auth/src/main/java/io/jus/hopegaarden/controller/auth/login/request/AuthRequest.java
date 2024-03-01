@@ -1,4 +1,4 @@
-package io.jus.hopegaarden.controller.auth.request;
+package io.jus.hopegaarden.controller.auth.login.request;
 
 import jakarta.validation.constraints.NotBlank;
 

@@ -1,9 +1,10 @@
-package io.jus.hopegaarden.controller.auth;
+package io.jus.hopegaarden.controller.auth.login;
 
-import io.jus.hopegaarden.controller.auth.request.AuthRequest;
-import io.jus.hopegaarden.controller.auth.response.LoginResponse;
-import io.jus.hopegaarden.sevice.auth.AuthService;
-import io.jus.hopegaarden.sevice.auth.response.AuthResponse;
+import io.jus.hopegaarden.controller.auth.login.request.AuthRequest;
+import io.jus.hopegaarden.controller.auth.login.response.LoginResponse;
+import io.jus.hopegaarden.sevice.auth.login.AuthResponse;
+import io.jus.hopegaarden.sevice.auth.login.AuthService;
+import io.jus.hopegaarden.sevice.auth.login.response.AuthResponse;
 import io.jus.hopegaarden.sevice.jwt.JwtTokenProvider;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

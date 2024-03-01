@@ -1,6 +1,6 @@
-package io.jus.hopegaarden.sevice.auth;
+package io.jus.hopegaarden.sevice.auth.login;
 
-import io.jus.hopegaarden.controller.auth.request.AuthRequest;
+import io.jus.hopegaarden.controller.auth.login.request.AuthRequest;
 import io.jus.hopegaarden.domain.define.member.Member;
 import io.jus.hopegaarden.domain.define.member.repository.MemberRepository;
 import io.jus.hopegaarden.domain.define.token.jwt.JwtToken;
@@ -9,7 +9,7 @@ import io.jus.hopegaarden.domain.define.token.jwt.repository.TokenRepository;
 import io.jus.hopegaarden.exception.ErrorCode;
 import io.jus.hopegaarden.exception.exceptions.auth.TokenInvalidException;
 import io.jus.hopegaarden.exception.exceptions.member.MemberNotFoundException;
-import io.jus.hopegaarden.sevice.auth.response.AuthResponse;
+import io.jus.hopegaarden.sevice.auth.login.response.AuthResponse;
 import io.jus.hopegaarden.sevice.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
