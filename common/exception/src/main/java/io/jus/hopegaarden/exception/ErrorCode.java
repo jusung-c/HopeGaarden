@@ -13,7 +13,7 @@ public enum ErrorCode {
 
 
     // Auth
-
+    PASSWORD_DO_NOT_MATCH(400, HttpStatus.BAD_REQUEST, "패스워드가 일치하지 않습니다."),
 
     // Jwt
     JWT_TOKEN_EXPIRED(401, HttpStatus.UNAUTHORIZED, "JWT 토큰이 만료되었습니다."),
