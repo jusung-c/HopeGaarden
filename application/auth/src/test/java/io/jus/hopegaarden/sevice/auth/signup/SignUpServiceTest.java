@@ -9,6 +9,7 @@ import io.jus.hopegaarden.exception.exceptions.auth.SignUpException;
 import io.jus.hopegaarden.utils.IntegrationHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
@@ -25,6 +26,9 @@ class SignUpServiceTest extends IntegrationHelper {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Test
     void 회원가입_성공_테스트() {
@@ -46,7 +50,7 @@ class SignUpServiceTest extends IntegrationHelper {
         assertSoftly(softly -> {
             softly.assertThat(findMember).isNotNull();
             softly.assertThat(findMember.getEmail()).isEqualTo(request.email());
-            softly.assertThat(findMember.getPassword()).isEqualTo(request.password());
+            softly.assertThat(encoder.matches(request.password(), findMember.getPassword())).isTrue();
         });
     }
 
