@@ -7,8 +7,11 @@ import io.jus.hopegaarden.domain.define.member.constant.MemberRole;
 import io.jus.hopegaarden.domain.define.member.repository.MemberRepository;
 import io.jus.hopegaarden.exception.ErrorCode;
 import io.jus.hopegaarden.exception.exceptions.auth.SignUpException;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,14 +24,17 @@ import java.util.function.Function;
 public class SignUpService implements SignUpUsecase {
 
     private final MemberRepository memberRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
+    @Transactional
     public void requestSignup(SignUpRequest request) {
         // 입력된 패스워드가 서로 일치하는지 확인
         verifyCommand(request);
 
         // 회원 등록
-        Member savedMember = memberRepository.save(memberMapper.apply(request));
+        String encodedPassword = bCryptPasswordEncoder.encode(request.password());
+        Member savedMember = memberRepository.save(memberMapper.apply(request.withEncodedPassword(encodedPassword)));
 
         // TODO : 인증메일 발송
 

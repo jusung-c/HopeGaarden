@@ -23,4 +23,8 @@ public record SignUpRequest(
         @NotBlank(message = "패스워드를 확인해주세요.")
         String passwordVerify
 ) {
+        // encode된 password를 설정하는 메서드 추가
+        public SignUpRequest withEncodedPassword(String encodedPassword) {
+                return new SignUpRequest(nickname(), email(), encodedPassword, passwordVerify());
+        }
 }
