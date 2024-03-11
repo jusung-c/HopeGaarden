@@ -5,6 +5,10 @@ import io.jus.hopegaarden.controller.auth.login.response.LoginResponse;
 import io.jus.hopegaarden.sevice.auth.login.AuthService;
 import io.jus.hopegaarden.sevice.auth.login.response.AuthResponse;
 import io.jus.hopegaarden.sevice.jwt.JwtTokenProvider;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -19,8 +23,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
-    private final JwtTokenProvider jwtTokenProvider;
 
+    @ApiResponse(responseCode = "200", description = "로그인 요청 성공",
+                    content = @Content(schema = @Schema(implementation = LoginResponse.class)))
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody @Valid AuthRequest login) {
 
@@ -43,6 +48,8 @@ public class AuthController {
                         .build());
     }
 
+    @ApiResponse(responseCode = "200", description = "토큰 재발급 요청 성공",
+                    content = @Content(schema = @Schema(implementation = LoginResponse.class)))
     @PostMapping("/refresh")
     public ResponseEntity<LoginResponse> refreshToken(@CookieValue(name = "refreshToken") String refreshToken) throws IOException {
 

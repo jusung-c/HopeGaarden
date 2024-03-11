@@ -18,3 +18,8 @@ jwt:
   expiration: 86400000 # 1 day
   refresh-token:
     expiration: 604800000 # 7 days
+
+# swagger config
+hopeCoreUrls : http://localhost:8080
+springdoc.swagger-ui.path: /auth/swagger-ui.html
+springdoc.api-docs.path: /auth/v3/api-docs

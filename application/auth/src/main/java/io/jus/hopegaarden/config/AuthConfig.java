@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import io.jus.hopegaarden.domain.define.member.repository.MemberRepository;
 import io.jus.hopegaarden.exception.ErrorCode;
 import io.jus.hopegaarden.exception.exceptions.member.MemberNotFoundException;
+import io.swagger.v3.core.jackson.ModelResolver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -38,6 +39,11 @@ public class AuthConfig {
         return new ObjectMapper()
                 // 객체의 속성 이름을 snake-case로 설정
                 .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+    }
+
+    @Bean
+    public ModelResolver modelResolver(ObjectMapper objectMapper) {
+        return new ModelResolver(objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE));
     }
 
     @Bean

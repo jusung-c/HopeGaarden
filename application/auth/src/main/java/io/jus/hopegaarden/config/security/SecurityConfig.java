@@ -28,6 +28,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeHttpRequest ->
                         authorizeHttpRequest
+                                // Swagger 추가
+                                .requestMatchers("/auth/v3/api-docs/**", "/auth/swagger-ui/**").permitAll()
                                 // UnAuth Area
                                 .requestMatchers("/auth/**").permitAll()
                                 // Others
